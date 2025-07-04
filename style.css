@@ -21,7 +21,7 @@ body {
 #findCity {
   border: none;
   outline: none;
-  transition: color 0.2s linear;
+  transition: all 0.3s ease;
   padding: 10px 45px 10px 15px;
   width: 100%;
   box-sizing: border-box;
@@ -37,6 +37,7 @@ body {
   position: absolute;
   right: 10px;
   top: 50%;
+  transition: all 0.3s ease;
   transform: translateY(-50%);
   outline: none;
   border: none;
@@ -54,6 +55,8 @@ body {
   background-color: #7c7c7c7c;
   border-radius: 8px;
 }
+
+
 
 #searchImg {
   width: 25px;
