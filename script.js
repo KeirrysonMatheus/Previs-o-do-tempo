@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded' , () => document.querySelector('#findCity').focus() )
 function getData(){
   const city = document.querySelector('#findCity').value
   if(city == ''){
