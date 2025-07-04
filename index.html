@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-<link rel="stylesheet" href="responsive.css">
- <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="style.css">
   <title>Previsão do Tempo</title>
 </head>
-<body class="d-flex justify-content-center align-items-center">
-    <div id="container" class=" bg-light p-3 shadow rounded justify-content-center">
-      <div class="input-container position-relative w-100">
-      <input class="shadow-sm outline rounded p-3 w-100 " type="text" id="findCity" placeholder="Digite a cidade. Ex: São Paulo, Brasill" required >
-      <button onclick="getData()" id="searchBtn" class=" rounded-5 p-2">
-      <img id="searchImg" src="./img/barra-de-pesquisa.png" alt="">
-    </div>      
-  </button>
 
-      <div id="weatherInfo" class="">
+<body class="d-flex justify-content-center align-items-center">
+
+
+  <div id="container" class=" bg-light p-3 shadow rounded justify-content-center">
+    <div class="input-container position-relative w-100">
+      <input class="shadow-sm outline rounded p-3 w-100 " type="text" id="findCity" placeholder="Ex: São Paulo, Brasil"
+        required>
+      <button onclick="getData()" id="searchBtn" class=" rounded-5 p-2">
+        <img id="searchImg" src="./img/barra-de-pesquisa.png" alt="">
+    </div>
+    </button>
+
+    <div id="weatherInfo" class="">
       <h2 id="cityName" class=" pt-3 fs-4">Esperando pesquisa...</h2>
       <p class="info" id="temperature"></p>
       <p class="info" id="feelsLike"></p>
@@ -26,8 +32,8 @@
       <p class="info" id="humidity"></p>
 
     </div>
-    </div>
-
+  </div>
 </body>
 <script src="script.js"></script>
+
 </html>
