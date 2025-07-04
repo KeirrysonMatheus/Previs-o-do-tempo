@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded' , () => document.querySelector('#findCity').focus() )
 function getData(){
+  document.querySelector('#cityName').innerHTML = 'Buscando...'
   const city = document.querySelector('#findCity').value
   if(city == ''){
-    document.querySelector('#cityName').innerHTML = 'Cidade não encontrada.';
+    document.querySelector('#cityName').innerHTML = 'Insira uma cidade.';
     clearFields();
     return
   }
@@ -24,8 +25,8 @@ async function searchCity(city) {
 
 function showData(data){
   if(data.cod === '404' || data.cod === 404){
-    clearFields()
     document.querySelector('#cityName').innerHTML = 'Cidade não encontrada.'
+    clearFields()
     return
   }
   const unity = ' m/s'
@@ -55,5 +56,8 @@ function clearFields() {
   document.querySelector('#humidity').textContent = ''
   document.querySelector('#wind').textContent = ''
   document.querySelector('#clouds').innerHTML = ''
-  document.querySelector('#cloudsIcon').src = ''
+  if(document.querySelector('#cloudsIcon').src){
+    document.querySelector('#cloudsIcon').src= ''
+    return
+  }
 }
