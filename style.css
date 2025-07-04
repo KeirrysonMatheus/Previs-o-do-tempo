@@ -10,10 +10,11 @@ body {
   background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1932&q=80');
 }
 
+
 .input-container {
   position: relative;
   width: 100%;
-  max-width: 400px; 
+  max-width: 400px;
   margin: 0 auto;
 }
 
@@ -45,7 +46,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
 }
 
 #searchBtn:hover,
