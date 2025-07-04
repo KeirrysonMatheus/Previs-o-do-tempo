@@ -19,22 +19,37 @@ async function searchCity(city) {
 }
 
 function showData(data){
-  if(data.cod === '404'){
-    const items = document.querySelectorAll('.info')
-     document.querySelector('#cityName').innerHTML = 'Cidade não encontrada.'
+  if(data.cod === '404' || data.cod === 404){
+    clearFields()
+    document.querySelector('#cityName').innerHTML = 'Cidade não encontrada.'
+    return
+  }
 
-   for (let i of items) {
-  i.textContent = ''
+  document.querySelector('#cityName').innerHTML = 'Clima em: ' + data.name + ', ' + data.sys.country
+  document.querySelector('#wind').textContent = 'Vento: ' + data.wind.speed + ' m/s'
+  document.querySelector('#humidity').textContent = 'Umidade: ' + data.main.humidity + '%'
+  document.querySelector('#temperature').textContent = 'Temperatura: ' + Math.ceil(data.main.temp) + '°C'
+  document.querySelector('#feelsLike').textContent = 'Sensação Térmica: ' + Math.ceil(data.main.feels_like) + '°C'
+
+
+  const clouds = document.querySelector('#clouds')
+  clouds.innerHTML = ''
+
+  const icon = document.createElement('img')
+  icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+  icon.alt = data.weather[0].description
+  icon.classList.add('me-2')
+
+  clouds.appendChild(icon)
+  clouds.innerHTML += data.weather[0].description
 }
-  return
+
+
+function clearFields() {
+  document.querySelector('#temperature').textContent = ''
+  document.querySelector('#feelsLike').textContent = ''
+  document.querySelector('#humidity').textContent = ''
+  document.querySelector('#wind').textContent = ''
+  document.querySelector('#clouds').innerHTML = ''
+  document.querySelector('#cloudsIcon').src = ''
 }
-  document.querySelector('#cityName').innerHTML = 'Clima em: ' +    document.querySelector('#findCity').value + ', ' +  data.sys.country
-  document.querySelector('#clouds').innerHTML = "Clima: <br>" + data.weather[0].description
-  document.querySelector('#wind').innerHTML = "Vento: " +data.wind.speed  +  'm/s'
-  document.querySelector('#humidity').innerHTML = 'Umidade: ' + data.main.humidity + '%'
-  document.querySelector('#temperature').innerHTML = 'Temperatura: ' + Math.ceil(data.main.temp) + '°C'
-  document.querySelector('#feelsLike').innerHTML = 'Sensação Térmica: ' + Math.ceil(data.main.feels_like) + '°C'
-
-}
-
-
