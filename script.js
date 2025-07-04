@@ -2,6 +2,7 @@ function getData(){
   const city = document.querySelector('#findCity').value
   if(city == ''){
     document.querySelector('#cityName').innerHTML = 'Cidade não encontrada.'
+    clearFields()
     return
   }
   searchCity(city)
@@ -9,11 +10,13 @@ function getData(){
 
 async function searchCity(city) {
   const key = 'aa776d709be6648d781129554c5dedf5'
+
   const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&lang=pt_br&units=metric`)
   .then( res => res.json())
   .catch(error => {
     console.error(error)
   })
+
   console.log(data)
   showData(data)
 }
@@ -24,9 +27,9 @@ function showData(data){
     document.querySelector('#cityName').innerHTML = 'Cidade não encontrada.'
     return
   }
-
+  const unity = ' m/s'
   document.querySelector('#cityName').innerHTML = 'Clima em: ' + data.name + ', ' + data.sys.country
-  document.querySelector('#wind').textContent = 'Vento: ' + data.wind.speed + ' m/s'
+  document.querySelector('#wind').textContent = 'Vento: ' + data.wind.speed + unity.toLowerCase()
   document.querySelector('#humidity').textContent = 'Umidade: ' + data.main.humidity + '%'
   document.querySelector('#temperature').textContent = 'Temperatura: ' + Math.ceil(data.main.temp) + '°C'
   document.querySelector('#feelsLike').textContent = 'Sensação Térmica: ' + Math.ceil(data.main.feels_like) + '°C'
