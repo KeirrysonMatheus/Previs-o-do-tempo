@@ -1,8 +1,8 @@
 function getData(){
   const city = document.querySelector('#findCity').value
   if(city == ''){
-    document.querySelector('#cityName').innerHTML = 'Cidade não encontrada.'
-    clearFields()
+    document.querySelector('#cityName').innerHTML = 'Cidade não encontrada.';
+    clearFields();
     return
   }
   searchCity(city)
