@@ -11,7 +11,7 @@
   <title>Previsão do Tempo</title>
 </head>
 
-<body class="d-flex justify-content-center align-items-center">
+<body class=" d-flex justify-content-center align-items-center">
 
 
   <div id="container" class=" bg-light p-3 shadow rounded justify-content-center">
@@ -48,9 +48,16 @@
       <div class="container d-flex align-items-center row">
       <div class="fw-semibold clouds shadow mx-1 my-1 border-0">
        <p class="info text-center text-success" id="clouds"></p>
+       
 </div>
 </div>
     </div>
+    <button id="map" class=" m-auto border-0 btn btn-dark p-1 d-none">Clique aqui <br> para ver o mapa da cidade</p>
+  </div>
+
+  <div id="PopupIframe" class=" shadow-lg d-none w-100 h-100 bg-light d-flex justify-content-center alig align-items-center">
+  <span id="closebtn" aria-hidden="true">&times;</span>
+   <iframe id="iframe"  width="95%" height="95%" style="border:0; border-radius: 5px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </body>
 <script src="script.js"></script>
