@@ -2,6 +2,7 @@
 
 * {
   font-family: 'Poppins', sans-serif;
+  
 }
 
 body {
@@ -63,22 +64,19 @@ body {
   height: 25px;
 }
 
+.card{
+  width: 47%;
+  margin: auto;
+  padding: 20px;
+}
+
 .info {
   text-transform: capitalize;
   font-size: 16px;
   color: #222;
-  background: rgba(255, 255, 255, 0.75);
-  border-radius: 12px;
-  padding: 10px 16px;
   margin: 8px 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
   transition: all 0.3s ease;
-  border-left: 5px solid #0d6efd;
-}
-
-.info:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .info:empty {
@@ -89,4 +87,8 @@ body {
   width: 50px;
   height: 50px;
   vertical-align: middle;
+}
+
+.weatherIcon{
+  width: 3rem;
 }
