@@ -1,9 +1,16 @@
-document.addEventListener('DOMContentLoaded' , () => document.querySelector('#findCity').focus() )
+document.addEventListener('DOMContentLoaded' , () =>{
+  
+  document.querySelector('#findCity').focus() 
+
+  
+})
 function getData(){
   document.querySelector('#cityName').innerHTML = 'Buscando...'
   const city = document.querySelector('#findCity').value
   if(city == ''){
     document.querySelector('#cityName').innerHTML = 'Insira uma cidade.';
+    const cards = document.getElementsByClassName('card')
+     Array.from(cards).forEach(e => e.classList.add('d-none'));
     clearFields();
     return
   }
@@ -11,9 +18,9 @@ function getData(){
 }
 
 async function searchCity(city) {
-  const key = 'aa776d709be6648d781129554c5dedf5'
+  const WeatherAPIKey = 'aa776d709be6648d781129554c5dedf5'
 
-  const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&lang=pt_br&units=metric`)
+  const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
   .then( res => res.json())
   .catch(error => {
     console.error(error)
@@ -24,17 +31,23 @@ async function searchCity(city) {
 }
 
 function showData(data){
+const cards = document.getElementsByClassName('card');
   if(data.cod === '404' || data.cod === 404){
+     Array.from(cards).forEach(e => e.classList.add('d-none'));
     document.querySelector('#cityName').innerHTML = 'Cidade não encontrada.'
     clearFields()
     return
   }
   const unity = ' m/s'
+
+ 
+  Array.from(cards).forEach(e => e.classList.remove('d-none'));
+
   document.querySelector('#cityName').innerHTML = 'Clima em: ' + data.name + ', ' + data.sys.country
-  document.querySelector('#wind').textContent = 'Vento: ' + data.wind.speed + unity.toLowerCase()
-  document.querySelector('#humidity').textContent = 'Umidade: ' + data.main.humidity + '%'
-  document.querySelector('#temperature').textContent = 'Temperatura: ' + Math.ceil(data.main.temp) + '°C'
-  document.querySelector('#feelsLike').textContent = 'Sensação Térmica: ' + Math.ceil(data.main.feels_like) + '°C'
+  document.querySelector('#wind').innerHTML = data.wind.speed + unity.toLowerCase()
+  document.querySelector('#humidity').innerHTML =  data.main.humidity + '%'
+  document.querySelector('#temperature').innerHTML = Math.ceil(data.main.temp) + '°C'
+  document.querySelector('#feelsLike').innerHTML = Math.ceil(data.main.feels_like) + '°C'
 
 
   const clouds = document.querySelector('#clouds')
