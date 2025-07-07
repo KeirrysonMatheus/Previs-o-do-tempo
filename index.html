@@ -23,14 +23,33 @@
     </div>
     </button>
 
-    <div id="weatherInfo" class="">
+    <div id="weatherInfo">
       <h2 id="cityName" class=" pt-3 fs-4">Esperando pesquisa...</h2>
-      <p class="info" id="temperature"></p>
-      <p class="info" id="feelsLike"></p>
-      <p class="info" id="clouds"></p>
-      <p class="info" id="wind"></p>
-      <p class="info" id="humidity"></p>
-
+      <div class="container d-flex row">
+      <div class="card d-flex justify-content-center text-center align-items-center fw-semibold shadow mx-1 my-1 border-0 d-none">
+        <img class="weatherIcon" src="./img/termometro.png" alt="">
+      <p class="info text-success" id="temperature"></p>
+      </div>
+      <div class="card d-flex justify-content-center text-center align-items-center fw-semibold shadow mx-1 my-1 border-0 d-none">
+        <img class="weatherIcon" src="./img/sensação.png" alt="">
+      <p class="info text-success" id="feelsLike"></p>
+      </div>
+      </div>
+      <div class="container d-flex row">
+      <div class="card d-flex justify-content-center text-center align-items-center fw-semibold shadow mx-1 my-1 border-0 d-none">
+        <img class="weatherIcon" src="./img/umidade.png" alt="">
+     <p class="info text-success" id="humidity"></p>
+      </div>
+      <div class="card d-flex justify-content-center text-center align-items-center fw-semibold shadow mx-1 my-1 border-0 d-none">
+        <img class="weatherIcon" src="./img/vento.png" alt="">
+      <p class="info text-success" id="wind"></p>
+      </div>
+      </div>
+      <div class="container d-flex align-items-center row">
+      <div class="fw-semibold clouds shadow mx-1 my-1 border-0">
+       <p class="info text-center text-success" id="clouds"></p>
+</div>
+</div>
     </div>
   </div>
 </body>
