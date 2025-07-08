@@ -104,7 +104,7 @@ body {
 }
 
 #map{
-  font-size: 10px;
+  font-size: 15px;
   border-radius: 4px;
   transition: color 0.5s linear;
 }
@@ -116,8 +116,13 @@ body {
 #closebtn{
   position: absolute;
   top:0.2em;
-  right: 1em;
-  font-size: 20px ;
+  right: 0.4em;
+  font-size: 30px ;
   cursor: pointer;
 }
-
+footer{
+  position: absolute;
+  bottom: 0;
+  left: 50;
+  right: 50;
+}
