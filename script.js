@@ -12,6 +12,9 @@ const feelsLike = document.querySelector('#feelsLike');
 const clouds = document.querySelector('#clouds');
 const cards = document.getElementsByClassName('card');
 const cloudsIcon = document.querySelector('#cloudsIcon');
+const searchBtn = document.getElementById('searchBtn')
+document.addEventListener('keydown' , (event) => {if(event.key == 'Enter'){ getData() }})
+
 
 document.addEventListener('DOMContentLoaded', () => {
   inputCity.focus();
@@ -47,7 +50,7 @@ async function searchCity(city) {
 }
 
 function showData(data) {
-  if (!data || data.cod === '404') {
+  if (data.cod === '404' || data.cod === 404) {
     Array.from(cards).forEach(e => e.classList.add('d-none'));
     mapBtn.classList.add('d-none');
     cityName.innerHTML = 'Cidade não encontrada.';
@@ -57,11 +60,16 @@ function showData(data) {
 
   mapBtn.addEventListener('click', () => {
     popup.classList.remove('d-none');
+    document.addEventListener('keydown' , (event) => {
+      if(event.key == 'Escape'){
+          popup.classList.add('d-none');
+      }
+    })
     closeBtn.addEventListener('click', () => {
       popup.classList.add('d-none');
       container.classList.remove('opacity-50');
       document.body.classList.add('');
-    } , {once: true});
+    });
     iframe.src = ` https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d400934.92240465875!2d${data.coord.lon}!3d${data.coord.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1751926749344!5m2!1spt-BR!2sbr `;
   });
 
