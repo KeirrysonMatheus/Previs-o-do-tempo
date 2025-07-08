@@ -120,9 +120,3 @@ body {
   font-size: 30px ;
   cursor: pointer;
 }
-footer{
-  position: absolute;
-  bottom: 0;
-  left: 50;
-  right: 50;
-}
