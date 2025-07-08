@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded' , () =>{
 })
 function getData(){
   document.querySelector('#cityName').innerHTML = 'Buscando...'
-  const city = document.querySelector('#findCity').value
+  let city = document.querySelector('#findCity').value.trimEnd().trimStart()
   if(city == ''){
     document.querySelector('#cityName').innerHTML = 'Insira uma cidade.';
     document.getElementById('map').classList.add('d-none')
@@ -12,6 +12,7 @@ function getData(){
     clearFields();
     return
   }
+  console.log(city)
   searchCity(city)
 }
 
