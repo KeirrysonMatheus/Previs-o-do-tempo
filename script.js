@@ -47,7 +47,7 @@ async function searchCity(city) {
 }
 
 function showData(data) {
-  if (data.cod === '404' || data.cod === 404) {
+  if (!data || data.cod === '404') {
     Array.from(cards).forEach(e => e.classList.add('d-none'));
     mapBtn.classList.add('d-none');
     cityName.innerHTML = 'Cidade não encontrada.';
@@ -61,7 +61,7 @@ function showData(data) {
       popup.classList.add('d-none');
       container.classList.remove('opacity-50');
       document.body.classList.add('');
-    });
+    } , {once: true});
     iframe.src = ` https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d400934.92240465875!2d${data.coord.lon}!3d${data.coord.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1751926749344!5m2!1spt-BR!2sbr `;
   });
 
