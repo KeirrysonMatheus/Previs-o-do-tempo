@@ -1,89 +1,102 @@
-document.addEventListener('DOMContentLoaded' , () =>{
-  document.querySelector('#findCity').focus() 
-})
-function getData(){
-  document.querySelector('#cityName').innerHTML = 'Buscando...'
-  let city = document.querySelector('#findCity').value.trimEnd().trimStart()
-  if(city == ''){
-    document.querySelector('#cityName').innerHTML = 'Insira uma cidade.';
-    document.getElementById('map').classList.add('d-none')
-    const cards = document.getElementsByClassName('card')
-     Array.from(cards).forEach(e => e.classList.add('d-none'));
+const inputCity = document.querySelector('#findCity');
+const cityName = document.getElementById('cityName');
+const mapBtn = document.getElementById('map');
+const container = document.getElementById('container');
+const popup = document.getElementById('PopupIframe');
+const closeBtn = document.getElementById('closebtn');
+const iframe = document.getElementById('iframe');
+const wind = document.querySelector('#wind');
+const humidity = document.querySelector('#humidity');
+const temperature = document.querySelector('#temperature');
+const feelsLike = document.querySelector('#feelsLike');
+const clouds = document.querySelector('#clouds');
+const cards = document.getElementsByClassName('card');
+const cloudsIcon = document.querySelector('#cloudsIcon');
+
+document.addEventListener('DOMContentLoaded', () => {
+  inputCity.focus();
+});
+
+function getData() {
+  cityName.innerHTML = 'Buscando...';
+  let city = inputCity.value.trim();
+
+  if (city === '') {
+    cityName.innerHTML = 'Insira uma cidade.';
+    mapBtn.classList.add('d-none');
+    Array.from(cards).forEach(e => e.classList.add('d-none'));
     clearFields();
-    return
+    return;
   }
-  console.log(city)
-  searchCity(city)
+
+  console.log(city);
+  searchCity(city);
 }
 
 async function searchCity(city) {
-  const WeatherAPIKey = 'aa776d709be6648d781129554c5dedf5'
+  const WeatherAPIKey = 'aa776d709be6648d781129554c5dedf5';
 
   const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
-  .then( res => res.json())
-  .catch(error => {
-    console.error(error)
-  })
+    .then(res => res.json())
+    .catch(error => {
+      console.error(error);
+    });
 
-  console.log(data)
-  showData(data)
+  console.log(data);
+  showData(data);
 }
 
-function showData(data){
-const cards = document.getElementsByClassName('card');
-  if(data.cod === '404' || data.cod === 404){
-     Array.from(cards).forEach(e => e.classList.add('d-none'));
-  document.getElementById('map').classList.add('d-none')
-    document.querySelector('#cityName').innerHTML = 'Cidade não encontrada.'
-    clearFields()
-    return
+function showData(data) {
+  if (data.cod === '404' || data.cod === 404) {
+    Array.from(cards).forEach(e => e.classList.add('d-none'));
+    mapBtn.classList.add('d-none');
+    cityName.innerHTML = 'Cidade não encontrada.';
+    clearFields();
+    return;
   }
 
-  document.getElementById('map').addEventListener('click' , () => {
-    document.getElementById('container').classList.add('opacity-50')
-    document.getElementById('PopupIframe').classList.remove('d-none')
-    document.getElementById('closebtn').addEventListener('click' , () => {
-      document.getElementById('PopupIframe').classList.add('d-none')
-      document.getElementById('container').classList.remove('opacity-50')
-      document.body.classList.add('')
-    })
-    document.getElementById('iframe').src = ` https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d400934.92240465875!2d${data.coord.lon}!3d${data.coord.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1751926749344!5m2!1spt-BR!2sbr `
-  })
+  mapBtn.addEventListener('click', () => {
+    popup.classList.remove('d-none');
+    closeBtn.addEventListener('click', () => {
+      popup.classList.add('d-none');
+      container.classList.remove('opacity-50');
+      document.body.classList.add('');
+    });
+    iframe.src = ` https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d400934.92240465875!2d${data.coord.lon}!3d${data.coord.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1751926749344!5m2!1spt-BR!2sbr `;
+  });
 
-  const unity = ' m/s'
+  const unity = ' m/s';
 
   Array.from(cards).forEach(e => e.classList.remove('d-none'));
-  document.querySelector('#cityName').innerHTML = 'Clima em: ' + data.name + ', ' + data.sys.country
-  document.querySelector('#wind').innerHTML = data.wind.speed + unity.toLowerCase()
-  document.querySelector('#humidity').innerHTML =  data.main.humidity + '%'
-  document.querySelector('#temperature').innerHTML = Math.ceil(data.main.temp) + '°C'
-  document.querySelector('#feelsLike').innerHTML = Math.ceil(data.main.feels_like) + '°C'
-  if(document.getElementById('map').classList.contains('d-none')){
-    document.getElementById('map').classList.remove('d-none');
-    document.getElementById('map').classList.add('d-block')
+  cityName.innerHTML = 'Clima em: ' + data.name + ', ' + data.sys.country;
+  wind.innerHTML = data.wind.speed + unity.toLowerCase();
+  humidity.innerHTML = data.main.humidity + '%';
+  temperature.innerHTML = Math.ceil(data.main.temp) + '°C';
+  feelsLike.innerHTML = Math.ceil(data.main.feels_like) + '°C';
+
+  if (mapBtn.classList.contains('d-none')) {
+    mapBtn.classList.remove('d-none');
+    mapBtn.classList.add('d-block');
   }
 
-  const clouds = document.querySelector('#clouds')
-  clouds.innerHTML = ''
+  clouds.innerHTML = '';
 
-  const icon = document.createElement('img')
-  icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-  icon.alt = data.weather[0].description
-  icon.classList.add('me-2')
+  const icon = document.createElement('img');
+  icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+  icon.alt = data.weather[0].description;
+  icon.classList.add('me-2');
 
-  clouds.appendChild(icon)
-  clouds.innerHTML += data.weather[0].description
+  clouds.appendChild(icon);
+  clouds.innerHTML += data.weather[0].description;
 }
 
-
 function clearFields() {
-  document.querySelector('#temperature').textContent = ''
-  document.querySelector('#feelsLike').textContent = ''
-  document.querySelector('#humidity').textContent = ''
-  document.querySelector('#wind').textContent = ''
-  document.querySelector('#clouds').innerHTML = ''
-  if(document.querySelector('#cloudsIcon').src){
-    document.querySelector('#cloudsIcon').src= ''
-    return
+  temperature.textContent = '';
+  feelsLike.textContent = '';
+  humidity.textContent = '';
+  wind.textContent = '';
+  clouds.innerHTML = '';
+  if (cloudsIcon && cloudsIcon.src) {
+    cloudsIcon.src = '';
   }
 }
