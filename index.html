@@ -16,7 +16,7 @@
 
   <div id="container" class=" bg-light p-3 shadow rounded justify-content-center">
     <div class="input-container position-relative w-100">
-      <input class="shadow-sm outline rounded p-3 w-100 " type="text" id="findCity" placeholder="Ex: São Paulo, Brasil"
+      <input class="shadow-sm outline rounded p-3 w-100 " type="text" id="findCity" placeholder="Ex: São Paulo, BR"
         required>
       <button onclick="getData()" id="searchBtn" class=" rounded-5 p-2">
         <img id="searchImg" src="./img/barra-de-pesquisa.png" alt="">
@@ -52,13 +52,16 @@
 </div>
 </div>
     </div>
-    <button id="map" class=" m-auto border-0 btn btn-dark p-1 d-none">Clique aqui <br> para ver o mapa da cidade</p>
+    <button id="map" class=" m-auto border-0 d-none">Clique aqui <br> para ver o mapa da cidade</p>
+
   </div>
 
   <div id="PopupIframe" class=" shadow-lg d-none w-100 h-100 bg-light d-flex justify-content-center alig align-items-center">
   <span id="closebtn" aria-hidden="true">&times;</span>
    <iframe id="iframe"  width="95%" height="95%" style="border:0; border-radius: 5px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
+
+
 </body>
 <script src="script.js"></script>
 
