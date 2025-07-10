@@ -11,20 +11,37 @@ const temperature = document.querySelector('#temperature');
 const feelsLike = document.querySelector('#feelsLike');
 const clouds = document.querySelector('#clouds');
 const cards = document.getElementsByClassName('card');
+const items = document.querySelectorAll('.item')
 const cloudsIcon = document.querySelector('#cloudsIcon');
 const searchBtn = document.getElementById('searchBtn')
+const searchImg = document.getElementById('searchImg')
+const themeBtn = document.querySelector('#changeThemeIcon')
+const loader = document.querySelector('#loading')
+let globalData = null
+let theme = localStorage.getItem('theme')
+if(theme == 'undefined'){
+  localStorage.setItem('theme' , theme)
+  theme = localStorage.getItem('theme')
+}
+if(theme == 'dark'){
+    changeToDark()
+  }   
 document.addEventListener('keydown' , (event) => {if(event.key == 'Enter'){ getData() }})
 
 
 document.addEventListener('DOMContentLoaded', () => {
   inputCity.focus();
-});
+}
+
+);
+
 
 function getData() {
-  cityName.innerHTML = 'Buscando...';
+  loader.classList.remove('d-none')
   let city = inputCity.value.trim();
 
   if (city === '') {
+    loader.classList.add('d-none')
     cityName.innerHTML = 'Insira uma cidade.';
     mapBtn.classList.add('d-none');
     Array.from(cards).forEach(e => e.classList.add('d-none'));
@@ -44,15 +61,16 @@ async function searchCity(city) {
     .catch(error => {
       console.error(error);
     });
-
-  console.log(data);
+  globalData = data
   showData(data);
 }
 
 function showData(data) {
   if (data.cod === '404' || data.cod === 404) {
+    loader.classList.add('d-none')
     Array.from(cards).forEach(e => e.classList.add('d-none'));
     mapBtn.classList.add('d-none');
+    loader.classList.add('d-none')
     cityName.innerHTML = 'Cidade não encontrada.';
     clearFields();
     return;
@@ -74,7 +92,7 @@ function showData(data) {
   });
 
   const unity = ' m/s';
-
+  loader.classList.add('d-none')
   Array.from(cards).forEach(e => e.classList.remove('d-none'));
   cityName.innerHTML = 'Clima em: ' + data.name + ', ' + data.sys.country;
   wind.innerHTML = data.wind.speed + unity.toLowerCase();
@@ -96,6 +114,53 @@ function showData(data) {
 
   clouds.appendChild(icon);
   clouds.innerHTML += data.weather[0].description;
+  return data
+}
+
+function changeTheme(){
+  if(theme == 'dark'){
+    changeToLight()
+  } else{
+    changeToDark()
+  }
+}
+
+function changeToDark () {
+  items.forEach(item => item.classList.remove('bg-light','text-black'))
+  Array.from(cards).forEach( card => card.classList.remove('bg-light' ,'text-black'))
+
+  items.forEach(item => item.classList.add('bg-dark','text-white'))
+  Array.from(cards).forEach( card => card.classList.add('bg-dark'))
+  document.body.style.backgroundImage = "url('./img/fundo-escuro.jpg')"
+  localStorage.setItem('theme' , 'dark')
+  theme = localStorage.getItem('theme')
+  themeBtn.src ='./img/light.png'
+  searchImg.src = './img/barra-de-pesquisa-branca.png'
+
+  } 
+
+  function changeToLight(){
+  items.forEach(item => item.classList.remove('bg-dark','text-white'))
+  Array.from(cards).forEach( card => card.classList.remove('bg-dark'))
+  items.forEach(item => item.classList.add('bg-light' , 'text-black'))
+  Array.from(cards).forEach( card => card.classList.add('bg-light'))
+  document.body.style.backgroundImage = "url('./img/fundo-claro.jpg')"
+  localStorage.setItem('theme' , 'light')
+  theme = localStorage.getItem('theme')
+  themeBtn.src ='./img/dark.png'
+  searchImg.src = './img/barra-de-pesquisa.png'
+
+}
+
+function convertToF(temp , element){
+  if(element == 'temp'){
+  let Fahrenheit = temp * 1.8 + 32
+  temperature.textContent = Fahrenheit + 'F°'
+}
+if(element == 'feelsLike'){
+  let Fahrenheit = temp * 1.8 + 32
+  feelsLike.textContent = Fahrenheit + 'F°'
+}
 }
 
 function clearFields() {
