@@ -2,15 +2,15 @@
 
 * {
   font-family: 'Poppins', sans-serif;
-  
+  transition: all 0.5s linear;
+
 }
 
 body {
   height: 100dvh;
   width: 100dvw;
-  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1932&q=80');
+  background-image: url('./img/fundo-claro.jpg');
 }
-
 
 .input-container {
   position: relative;
@@ -70,6 +70,10 @@ body {
   padding: 20px;
 }
 
+#weatherdata{
+  margin: auto;
+}
+
 .info {
   text-transform: capitalize;
   font-size: 16px;
@@ -106,7 +110,7 @@ body {
 #map{
   font-size: 15px;
   border-radius: 4px;
-  transition: color 0.5s linear;
+  transition: all 0.3s ease;
 }
 
 #map:hover{
@@ -114,9 +118,39 @@ body {
 }
 
 #closebtn{
+  height: 30px;
   position: absolute;
-  top:0.2em;
+  top:0.9em;
   right: 0.4em;
   font-size: 30px ;
+  cursor: pointer;
+}
+
+#changeThemeIcon{
+  cursor: pointer;
+  height: 40px;
+  transition: all 0.2s ease;
+}
+
+#changeThemeIcon:hover{
+ transform: scale(1.2)
+}
+
+@media(max-width: 900px){
+  #closebtn{
+    right: 0.01em;
+  }
+} 
+
+#loading {
+  animation: loading 1s infinite linear;
+}
+
+@keyframes loading {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.convertToF{
+  font-size: 10px;
   cursor: pointer;
 }
