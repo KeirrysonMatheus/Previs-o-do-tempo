@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.5s linear;
+
+}
+
+body {
+  height: 100dvh;
+  width: 100dvw;
+  background-image: url('./img/fundo-claro.jpg');
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#findCity {
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+  padding: 10px 45px 10px 15px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+#findCity::placeholder {
+  font-size: 15px;
+}
+
+#searchBtn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transition: all 0.3s ease;
+  transform: translateY(-50%);
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#searchBtn:hover,
+#findCity:hover {
+  background-color: #7c7c7c7c;
+  border-radius: 8px;
+}
+
+
+
+#searchImg {
+  width: 25px;
+  height: 25px;
+}
+
+.card{
+  width: 47%;
+  margin: auto;
+  padding: 20px;
+}
+
+#weatherdata{
+  margin: auto;
+}
+
+.info {
+  text-transform: capitalize;
+  font-size: 16px;
+  color: #222;
+  margin: 8px 0;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+
+.info:empty {
+  display: none;
+}
+
+#clouds img {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+}
+
+.weatherIcon{
+  width: 3rem;
+}
+
+#PopupIframe{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#map{
+  font-size: 15px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+#map:hover{
+  background-color: #9b9b9b ;
+}
+
+#closebtn{
+  height: 30px;
+  position: absolute;
+  top:0.9em;
+  right: 0.4em;
+  font-size: 30px ;
+  cursor: pointer;
+}
+
+#changeThemeIcon{
+  cursor: pointer;
+  height: 40px;
+  transition: all 0.2s ease;
+}
+
+#changeThemeIcon:hover{
+ transform: scale(1.2)
+}
+
+#loading {
+  animation: loading 1s infinite linear;
+}
+.convertToF{
+  font-size: 10px;
+  cursor: pointer;
+}
+
+@media(max-width: 900px){
+  #closebtn{
+    right: 0.01em;
+  }
+} 
+
+@media (max-width: 576px) {
+  .card {
+    width: 100%;
+  }
+}
+
+
+@keyframes loading {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
