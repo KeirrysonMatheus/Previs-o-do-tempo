@@ -150,8 +150,8 @@ body {
   }
 } 
 
-@media (max-width: 576px) {
-  .card {
+@media(max-width: 322px){
+  .card{
     width: 100%;
   }
 }
