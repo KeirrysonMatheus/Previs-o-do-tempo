@@ -34,12 +34,12 @@
       <div class="item card d-flex justify-content-center text-center align-items-center fw-semibold shadow mx-1 my-1 border-0 d-none">
         <img class="weatherIcon" src="./img/termometro.png" alt="">
       <p class="info text-success" id="temperature"></p>
-      <p onclick="convertToF(Math.ceil(globalData.main.temp) , 'temp')" class="convertToF text-decoration-underline" >Converter para Fahrenheit</p>
+      <p id="tempToFah"  class="convertToF text-decoration-underline" >Converter para Fahrenheit</p>
       </div>
       <div class="item card d-flex justify-content-center text-center align-items-center fw-semibold shadow mx-1 my-1 border-0 d-none">
         <img class="weatherIcon" src="./img/sensação.png" alt="">
       <p class="info text-success" id="feelsLike"></p>
-        <p onclick="convertToF(Math.ceil(globalData.main.feels_like) , 'feelsLike')" class="convertToF text-decoration-underline">Converter para Fahrenheit</p>
+        <p id="feelsLikeConvert"  class="convertToF text-decoration-underline">Converter para Fahrenheit</p>
       </div>
       </div>
       <div class="container d-flex row">
@@ -71,6 +71,5 @@
 
 
 </body>
-<script src="script.js"></script>
-
+<script src="./js/main.js" type="module"></script>
 </html>
