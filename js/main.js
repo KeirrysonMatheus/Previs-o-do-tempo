@@ -1,42 +1,31 @@
-import { getData , searchCity } from "./api";
-import { clearFields , showData } from "./ui";
-import { changeTheme, changeToDark , changeToLight } from "./theme";
-import { convertToF } from "./conversion";
+import { convertToF } from './conversion.js';
+import { getData , globalData} from './api.js';
+import { changeTheme, initTheme } from './theme.js';
 
+const feelsLikeConvert = document.querySelector('#feelsLikeConvert')
+const tempConvert = document.querySelector('#tempToFah')
 const inputCity = document.querySelector('#findCity');
-const cityName = document.getElementById('cityName');
-const mapBtn = document.getElementById('map');
-const container = document.getElementById('container');
-const popup = document.getElementById('PopupIframe');
-const closeBtn = document.getElementById('closebtn');
-const iframe = document.getElementById('iframe');
-const wind = document.querySelector('#wind');
-const humidity = document.querySelector('#humidity');
-const temperature = document.querySelector('#temperature');
-const feelsLike = document.querySelector('#feelsLike');
-const clouds = document.querySelector('#clouds');
-const cards = document.getElementsByClassName('card');
-const items = document.querySelectorAll('.item')
-const cloudsIcon = document.querySelector('#cloudsIcon');
-const searchBtn = document.getElementById('searchBtn')
-const searchImg = document.getElementById('searchImg')
-const themeBtn = document.querySelector('#changeThemeIcon')
-const loader = document.querySelector('#loading')
+const searchBtn = document.getElementById('searchBtn');
+const themeBtn = document.querySelector('#changeThemeIcon');
+
 document.addEventListener('DOMContentLoaded', () => {
   inputCity.focus();
+  initTheme();
 });
-let globalData = null
-let theme = localStorage.getItem('theme')
-if(theme == 'undefined'){
-  localStorage.setItem('theme' , theme)
-  theme = localStorage.getItem('theme')
-}
-if(theme == 'dark'){
-    changeToDark()
-  }   
-document.addEventListener('keydown' , (event) => {
-  if(event.key == 'Enter'){ 
-    getData() }
-})
 
+searchBtn.addEventListener('click', getData);
 
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    getData();
+  }
+});
+
+themeBtn.addEventListener('click', changeTheme);
+tempConvert.addEventListener('click', () => {
+  convertToF(Math.ceil(globalData.main.temp), 'temp');
+});
+
+feelsLikeConvert.addEventListener('click', () => {
+  convertToF(Math.ceil(globalData.main.feels_like), 'feelsLike');
+});
