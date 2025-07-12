@@ -1,0 +1,3 @@
+//TODO: Histórico de cidades pesquisadas
+//TODO: Detectar cidade atual do usuário
+//TODO: Autocomplete
