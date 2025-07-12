@@ -1,4 +1,5 @@
 import { showData } from './ui.js';
+import { clearFields } from './ui.js';
 
 const inputCity = document.querySelector('#findCity');
 const cityName = document.getElementById('cityName');
