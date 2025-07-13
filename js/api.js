@@ -34,6 +34,7 @@ async function getDataByName() {
 }
 
 async function getDataByCoord(pos){
+  loader.classList.remove('d-none');
   const dados = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
   .then(res => res.json())
   .catch(e => console.error(e))
