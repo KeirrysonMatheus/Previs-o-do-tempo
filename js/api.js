@@ -10,18 +10,8 @@ const WeatherAPIKey = 'aa776d709be6648d781129554c5dedf5';
 
 let globalData = null;
 
-async function searchCity(city) {
-  
-  const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
-    .then(res => res.json())
-    .catch(error => {
-      console.error(error);
-    });
-  globalData = data;
-  showData(data);
-}
 
-function getDataByName() {
+async function getDataByName() {
   loader.classList.remove('d-none');
   const city = inputCity.value.trim();
 
@@ -34,7 +24,13 @@ function getDataByName() {
     return;
   }
 
-  searchCity(city);
+  const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
+    .then(res => res.json())
+    .catch(error => {
+      console.error(error);
+    });
+  globalData = data;
+  showData(data);
 }
 
 async function getDataByCoord(pos){
