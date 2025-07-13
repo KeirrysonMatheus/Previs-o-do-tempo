@@ -4,7 +4,6 @@ function getPos() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         resolve(position);
-        console.log(position)
         getDataByCoord(position, WeatherAPIKey)
       },
       (error) => {
