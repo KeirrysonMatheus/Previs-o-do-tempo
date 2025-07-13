@@ -28,5 +28,5 @@ tempConvert.addEventListener('click', () => {
 });
 
 feelsLikeConvert.addEventListener('click', () => {
-  convertToF(Math.ceil(globalData.main.feels_like), 'feelsLike');
+  convertToF(Math.ceil(globalData.main.feels_like), 'feelsLike', );
 });
