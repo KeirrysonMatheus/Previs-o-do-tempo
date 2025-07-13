@@ -42,6 +42,7 @@ async function getDataByCoord(pos){
   .then(res => res.json())
   .catch(e => console.error(e))
   console.log(dados)
+  globalData = dados
   showData(dados)
 }
 
