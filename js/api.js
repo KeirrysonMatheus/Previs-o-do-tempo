@@ -42,4 +42,4 @@ async function getDataByCoord(pos){
   showData(dados)
 }
 
-export { searchCity, getDataByName , globalData , getDataByCoord , WeatherAPIKey };
+export { getDataByName , globalData , getDataByCoord , WeatherAPIKey };
