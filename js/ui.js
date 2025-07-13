@@ -74,5 +74,4 @@ function clearFields() {
     cloudsIcon.src = '';
   }
 }
-
-export { showData, clearFields };
+export { showData, clearFields , temperature , feelsLike};
