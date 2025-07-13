@@ -1,7 +1,9 @@
 
 import { convertToF } from './conversion.js';
-import { getData , globalData} from './api.js';
+import { getDataByName, getDataByCoord , globalData } from './api.js';
 import { changeTheme, initTheme } from './theme.js';
+import { getPos }  from './currentPosition.js';
+
 
 const feelsLikeConvert = document.querySelector('#feelsLikeConvert')
 const tempConvert = document.querySelector('#tempToFah')
@@ -12,13 +14,14 @@ const themeBtn = document.querySelector('#changeThemeIcon');
 document.addEventListener('DOMContentLoaded', () => {
   inputCity.focus();
   initTheme();
+  getPos()
 });
 
-searchBtn.addEventListener('click', getData);
+searchBtn.addEventListener('click', getDataByName);
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
-    getData();
+    getDataByName();
   }
 });
 

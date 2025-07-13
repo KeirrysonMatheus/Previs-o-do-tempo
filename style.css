@@ -139,6 +139,7 @@ body {
 #loading {
   animation: loading 1s infinite linear;
 }
+
 .convertToF{
   font-size: 10px;
   cursor: pointer;
