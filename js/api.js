@@ -1,5 +1,6 @@
 import { showData , clearFields } from './ui.js';
 
+
 const inputCity = document.querySelector('#findCity');
 const cityName = document.getElementById('cityName');
 const mapBtn = document.getElementById('map');
