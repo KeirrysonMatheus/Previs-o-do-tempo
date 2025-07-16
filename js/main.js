@@ -27,10 +27,13 @@ document.addEventListener('keydown', (event) => {
 });
 
 themeBtn.addEventListener('click', changeTheme);
-tempConvert.addEventListener('click', () => {
-  convertUnity(Math.ceil(globalData.main.temp), 'temp' , tempConvert , tempUnity );
+
+tempConvert.addEventListener("click", () => {
+  const currentValue = parseFloat(temperature.textContent); 
+  tempUnity = convertUnity(currentValue, "temp", tempConvert, tempUnity)
 });
 
-feelsLikeConvert.addEventListener('click', () => {
-  convertUnity(Math.ceil(globalData.main.feels_like), 'feelsLike', feelsLikeConvert , feelsLikeUnity );
+feelsLikeConvert.addEventListener("click", () => {
+  const currentValue = parseFloat(feelsLike.textContent);
+  feelsLikeUnity = convertUnity(currentValue, "feelsLike", feelsLikeConvert, feelsLikeUnity);
 });
