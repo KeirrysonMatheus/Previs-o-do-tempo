@@ -1,10 +1,11 @@
 
-import { convertToF } from './conversion.js';
+import { convertUnity } from './conversion.js';
 import { getDataByName, getDataByCoord , globalData } from './api.js';
 import { changeTheme, initTheme } from './theme.js';
 import { getPos }  from './currentPosition.js';
 
-
+let feelsLikeUnity = 'Celsius'
+let tempUnity = 'Celsius'
 const feelsLikeConvert = document.querySelector('#feelsLikeConvert')
 const tempConvert = document.querySelector('#tempToFah')
 const inputCity = document.querySelector('#findCity');
@@ -27,9 +28,9 @@ document.addEventListener('keydown', (event) => {
 
 themeBtn.addEventListener('click', changeTheme);
 tempConvert.addEventListener('click', () => {
-  convertToF(Math.ceil(globalData.main.temp), 'temp');
+  convertUnity(Math.ceil(globalData.main.temp), 'temp' , tempConvert , tempUnity );
 });
 
 feelsLikeConvert.addEventListener('click', () => {
-  convertToF(Math.ceil(globalData.main.feels_like), 'feelsLike', );
+  convertUnity(Math.ceil(globalData.main.feels_like), 'feelsLike', feelsLikeConvert , feelsLikeUnity );
 });
