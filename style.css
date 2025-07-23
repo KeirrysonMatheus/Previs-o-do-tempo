@@ -3,7 +3,6 @@
 * {
   font-family: 'Poppins', sans-serif;
   transition: all 0.5s linear;
-
 }
 
 body {
@@ -64,11 +63,7 @@ body {
   height: 25px;
 }
 
-.card{
-  width: 47%;
-  margin: auto;
-  padding: 20px;
-}
+
 
 #weatherdata{
   margin: auto;
@@ -76,25 +71,30 @@ body {
 
 .info {
   text-transform: capitalize;
-  font-size: 16px;
+  font-size: 15px;
   color: #222;
   margin: 8px 0;
   backdrop-filter: blur(6px);
   transition: all 0.3s ease;
+  
 }
 
-.info:empty {
-  display: none;
+
+
+
+.info_Big{
+  font-size: calc(1.4rem + 1vw) !important;
+  font-family: 'Arial';
+  font-weight: 500;
 }
 
-#clouds img {
-  width: 50px;
-  height: 50px;
-  vertical-align: middle;
+.bigWeatherIcon{
+  height: 25dvh;
+  width: 25dvh;
 }
 
 .weatherIcon{
-  width: 3rem;
+  width: 1.5rem;
 }
 
 #PopupIframe{
@@ -132,12 +132,17 @@ body {
   transition: all 0.2s ease;
 }
 
+p#description{
+  text-transform: capitalize;
+}
 #changeThemeIcon:hover{
  transform: scale(1.2)
 }
 
 #loading {
   animation: loading 1s infinite linear;
+  width: 10dvh;
+  height: 10dvh;
 }
 
 .convertToF{
@@ -150,6 +155,22 @@ body {
     right: 0.01em;
   }
 } 
+
+#windDiv , #feelsDiv , #humidityDiv{
+  width: auto;
+}
+@media (max-width:381px) {
+  #windDiv{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+  }
+
+  #feelsDiv , #humidityDiv{
+    width: 50%;
+  }
+  
+}
 
 @media(max-width: 322px){
   .card{

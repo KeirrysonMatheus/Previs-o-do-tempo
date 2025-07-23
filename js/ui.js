@@ -10,13 +10,14 @@ const temperature = document.querySelector('#temperature');
 const feelsLike = document.querySelector('#feelsLike');
 const clouds = document.querySelector('#clouds');
 const cloudsIcon = document.querySelector('#cloudsIcon');
-const cards = document.getElementsByClassName('card');
+const weatherInfo = document.getElementById('weatherInfo')
 const loader = document.querySelector('#loading');
-
+const tempImg = document.querySelector('#tempImg')
+const description = document.querySelector('p#description')
 function showData(data) {
   if (data.cod === '404' || data.cod === 404) {
     loader.classList.add('d-none');
-    Array.from(cards).forEach(e => e.classList.add('d-none'));
+    weatherInfo.classList.add('d-none')
     mapBtn.classList.add('d-none');
     cityName.innerHTML = 'Cidade não encontrada.';
     clearFields();
@@ -34,16 +35,16 @@ function showData(data) {
       });
       closeBtn.addEventListener('click', () => {
         popup.classList.add('d-none');
-        container.classList.remove('opacity-50');
+        
       });
       popupInitialized = true;
     }
     iframe.src = `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d400934.92240465875!2d${data.coord.lon}!3d${data.coord.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1751926749344!5m2!1spt-BR!2sbr`;
   });
 
-  const unity = ' m/s';
+  const unity = ' Km/s';
   loader.classList.add('d-none');
-  Array.from(cards).forEach(e => e.classList.remove('d-none'));
+  weatherInfo.classList.remove('d-none')
   cityName.innerHTML = 'Clima em: ' + data.name + ', ' + data.sys.country;
   wind.innerHTML = data.wind.speed + unity.toLowerCase();
   humidity.innerHTML = data.main.humidity + '%';
@@ -55,13 +56,9 @@ function showData(data) {
     mapBtn.classList.add('d-block');
   }
 
-  clouds.innerHTML = '';
-  const icon = document.createElement('img');
-  icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-  icon.alt = data.weather[0].description;
-  icon.classList.add('me-2');
-  clouds.appendChild(icon);
-  clouds.innerHTML += data.weather[0].description;
+  
+  tempImg.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+  description.textContent = data.weather[0].description
 }
 
 function clearFields() {
