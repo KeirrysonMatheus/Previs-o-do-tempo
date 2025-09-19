@@ -1,16 +1,11 @@
-
 import { convertUnity } from './conversion.js';
-import { getDataByName, getDataByCoord , globalData } from './api.js';
+import { getDataByName, getForecastByName } from './api.js';
 import { changeTheme, initTheme } from './theme.js';
-import { getPos }  from './currentPosition.js';
-
-let feelsLikeUnity = 'Celsius'
-let tempUnity = 'Celsius'
-const feelsLikeConvert = document.querySelector('#feelsLikeConvert')
-const tempConvert = document.querySelector('#tempToFah')
+import { getPos } from './currentPosition.js';
+import { showForecast } from './ui.js';
 const inputCity = document.querySelector('#findCity');
 const searchBtn = document.getElementById('searchBtn');
-const themeBtn = document.querySelector('#changeThemeIcon');
+// const themeBtn = document.querySelector('#changeThemeIcon'); // REMOVA ESTA LINHA
 
 document.addEventListener('DOMContentLoaded', () => {
   inputCity.focus();
@@ -18,22 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
   getPos()
 });
 
-searchBtn.addEventListener('click', getDataByName);
+async function handleSearch() {
+  await getDataByName();
+  const forecast = await getForecastByName();
+  if (forecast && forecast.cod === "200") {
+    showForecast(forecast);
+  }
+}
+
+searchBtn.addEventListener('click', handleSearch);
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
-    getDataByName();
+    handleSearch();
   }
 });
 
-themeBtn.addEventListener('click', changeTheme);
-
-tempConvert.addEventListener("click", () => {
-  const currentValue = parseFloat(temperature.textContent); 
-  tempUnity = convertUnity(currentValue, "temp", tempConvert, tempUnity)
-});
-
-feelsLikeConvert.addEventListener("click", () => {
-  const currentValue = parseFloat(feelsLike.textContent);
-  feelsLikeUnity = convertUnity(currentValue, "feelsLike", feelsLikeConvert, feelsLikeUnity);
-});
+// themeBtn.addEventListener('click', changeTheme); // REMOVA ESTA LINHA

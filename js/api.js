@@ -1,5 +1,4 @@
-import { showData , clearFields } from './ui.js';
-
+import {showForecast, showData, clearFields } from './ui.js';
 
 const inputCity = document.querySelector('#findCity');
 const cityName = document.getElementById('cityName');
@@ -9,7 +8,7 @@ const cards = document.getElementsByClassName('card');
 const WeatherAPIKey = 'aa776d709be6648d781129554c5dedf5';
 
 let globalData = null;
-
+let globalForecast = null;
 
 async function getDataByName() {
   loader.classList.remove('d-none');
@@ -24,23 +23,59 @@ async function getDataByName() {
     return;
   }
 
-  const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
-    .then(res => res.json())
-    .catch(error => {
-      console.error(error);
-    });
-  globalData = data;
-  showData(data);
+  try {
+    const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
+      .then(res => res.json());
+    globalData = data;
+    showData(data);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    loader.classList.add('d-none');
+  }
 }
 
-async function getDataByCoord(pos){
+
+async function getDataByCoord(pos) {
   loader.classList.remove('d-none');
-  const dados = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
-  .then(res => res.json())
-  .catch(e => console.error(e))
-  console.log(dados)
-  globalData = dados
-  showData(dados)
+  try {
+    const dados = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
+      .then(res => res.json());
+    globalData = dados;
+    showData(dados);
+
+    // Buscar previsão de 5 dias por coordenadas
+    const forecast = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
+      .then(res => res.json());
+    globalForecast = forecast;
+    if (forecast && forecast.cod === "200") {
+      showForecast(forecast);
+    }
+  } catch (e) {
+    console.error(e);
+  } finally {
+    loader.classList.add('d-none');
+  }
+}
+async function getForecastByName() {
+  loader.classList.remove('d-none');
+  const city = inputCity.value.trim();
+
+  if (city === '') {
+    loader.classList.add('d-none');
+    return;
+  }
+
+  try {
+    const forecast = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${WeatherAPIKey}&lang=pt_br&units=metric`)
+      .then(res => res.json());
+    globalForecast = forecast;
+    return forecast;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    loader.classList.add('d-none');
+  }
 }
 
-export { getDataByName , globalData , getDataByCoord , WeatherAPIKey };
+export {globalForecast, getDataByName, globalData, getDataByCoord, WeatherAPIKey, getForecastByName };

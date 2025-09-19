@@ -61,14 +61,55 @@ function showData(data) {
   description.textContent = data.weather[0].description
 }
 
+/**
+ * Clears the weather data fields in the UI.
+ */
 function clearFields() {
   temperature.textContent = '';
   feelsLike.textContent = '';
   humidity.textContent = '';
   wind.textContent = '';
-  clouds.innerHTML = '';
+  clouds.textContent = '';
   if (cloudsIcon && cloudsIcon.src) {
     cloudsIcon.src = '';
   }
 }
-export { showData, clearFields , temperature , feelsLike};
+function showForecast(forecast) {
+  const forecastContainerId = 'forecastContainer';
+  let forecastContainer = document.getElementById(forecastContainerId);
+  if (!forecastContainer) {
+    forecastContainer = document.createElement('div');
+    forecastContainer.id = forecastContainerId;
+    forecastContainer.className = 'row mt-3 g-2 justify-content-center';
+    weatherInfo.appendChild(forecastContainer);
+  }
+  forecastContainer.innerHTML = '';
+
+  // Detecta o tema atual
+  const isDark = document.body.classList.contains('dark-theme');
+  const cardThemeClass = isDark ? 'bg-dark text-light' : 'bg-light text-dark';
+
+  // Agrupa por dia
+  const days = {};
+  forecast.list.forEach(item => {
+    const date = new Date(item.dt_txt);
+    const day = date.toLocaleDateString('pt-BR', { weekday: 'short', day: 'numeric', month: 'short' });
+    if (!days[day]) days[day] = [];
+    days[day].push(item);
+  });
+
+  Object.keys(days).slice(0, 5).forEach(day => {
+    const item = days[day].find(i => new Date(i.dt_txt).getHours() === 12) || days[day][0];
+    forecastContainer.innerHTML += `
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2 d-flex justify-content-center mb-2">
+        <div class="card shadow-sm border-0 p-2 w-100 ${cardThemeClass}">
+          <div class="fw-bold">${day}</div>
+          <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png" alt="" width="50">
+          <div class="fs-5">${Math.round(item.main.temp)}°C</div>
+          <div style="font-size: 0.9em;">${item.weather[0].description}</div>
+        </div>
+      </div>
+    `;
+  });
+}
+export { showData, clearFields , temperature , feelsLike, showForecast };

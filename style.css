@@ -6,9 +6,15 @@
 }
 
 body {
-  height: 100dvh;
-  width: 100dvw;
+  min-height: 100dvh;
+  min-width: 100dvw;
+  height: auto;
+  width: 100%;
   background-image: url('./img/fundo-claro.jpg');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-container {
@@ -183,3 +189,15 @@ p#description{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+#forecastContainer .card {
+  min-width: 120px;
+  max-width: 180px;
+  margin: 0 auto;
+}
+@media (max-width: 576px) {
+  #forecastContainer .card {
+    font-size: 0.95em;
+    padding: 0.5rem;
+  }
+}
+
